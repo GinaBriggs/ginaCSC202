@@ -1,7 +1,8 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { Foundation } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -15,20 +16,20 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
-        name="index"
+        name="(biodata)"
         options={{
-          title: 'Home',
+          title: 'BioData',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <FontAwesome5 name="tooth" size={24} color={focused ? color : "grey"} />
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
+          title: 'Clinical Records',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <Foundation name="clipboard-notes" size={24} color={focused ? color : "grey"} />
           ),
         }}
       />
