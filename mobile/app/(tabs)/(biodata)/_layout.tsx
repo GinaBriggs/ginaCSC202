@@ -5,7 +5,7 @@ import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { Button } from 'react-native';
+import { Button, Image } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -14,17 +14,14 @@ export default function TabLayout() {
     <Stack
       screenOptions={{
         headerShown: true,
-
+        headerRight: (() => <Image 
+        style={{width: 50,height: 50,}}
+        source={require('../../../assets/images/react-logo.png')}/>)
       }}>
       <Stack.Screen
         name="index"
         options={{
-          title: 'Get BioData',
-          headerRight: (() => <Button
-            onPress={() => router.push("create")}
-            title="Create"
-            color="white"
-          />)
+          title: 'Get BioData'
         }}
       />
 

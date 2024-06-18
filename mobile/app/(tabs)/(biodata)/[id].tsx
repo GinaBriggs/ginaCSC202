@@ -23,7 +23,7 @@ const id = () => {
 
     const fetchRecord = async () => {
         try {
-            const response = await axios.get(`http://172.20.10.2:3000/biodata-of-patients/${id}`);
+            const response = await axios.get(`http://10.9.116.121:3000/biodata-of-patients/${id}`);
             setFormData(response.data);
             console.log(response.data);
         } catch (error) {

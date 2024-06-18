@@ -1,24 +1,18 @@
 import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useLocalSearchParams } from 'expo-router';
 
 const create = () => {
-
-    const api = axios.create({
-        baseURL: 'http://localhost:3000', // Adjust this to your server's URL
-        timeout: 10000, // Adjust timeout as needed
-      });
-      
-      
+    const { id } = useLocalSearchParams();
 
     const [formData, setFormData] = useState({
-        firstName: '',
-        surName: '',
-        middleName: '',
-        dateOfBirth: '',
-        homeAddress: '',
-        dateOfRegistration: '',
-        matriculationNumber: '21120612475', // Default value
+        biodataOfPatientId: id,
+        clinicDate: '',
+        natureOfAilment: '',
+        medicinePrescribed: '',
+        procedureUndertaken: '',
+        dateOfNextAppointment: ''
     });
 
     const handleChange = (name: any, value: any) => {
@@ -30,16 +24,15 @@ const create = () => {
 
     const handleFormSubmit = async () => {
         try {
-            const response = await axios.post('http://10.9.116.121:3000/biodata-of-patients', formData);
+            const response = await axios.post('http://10.9.116.121:3000/clinical-records', formData);
             console.log(formData); // Handle the response from the backend
             setFormData({
-                firstName: '',
-                surName: '',
-                middleName: '',
-                dateOfBirth: '',
-                homeAddress: '',
-                dateOfRegistration: '',
-                matriculationNumber: '21120612475',
+                biodataOfPatientId: id,
+                clinicDate: '',
+                natureOfAilment: '',
+                medicinePrescribed: '',
+                procedureUndertaken: '',
+                dateOfNextAppointment: ''
             });
         } catch (error) {
             console.error(`problem ${error}`); // Handle any errors
@@ -52,9 +45,9 @@ const create = () => {
             <View style={styles.inputContainer}>
                 <Text style={styles.labelText}>First name:</Text>
                 <TextInput
-                    placeholder="First name"
-                    value={formData.firstName}
-                    onChangeText={(text) => handleChange('firstName', text)}
+                    placeholder="clinicDate"
+                    value={formData.clinicDate}
+                    onChangeText={(text) => handleChange('clinicDate', text)}
                     style={styles.input}
                 />
             </View>
@@ -62,9 +55,9 @@ const create = () => {
             <View style={styles.inputContainer}>
                 <Text style={styles.labelText}>Surname:</Text>
                 <TextInput
-                    placeholder="Surname"
-                    value={formData.surName}
-                    onChangeText={(text) => handleChange('surName', text)}
+                    placeholder="natureofAliment"
+                    value={formData.natureOfAilment}
+                    onChangeText={(text) => handleChange('natureOfAilment', text)}
                     style={styles.input}
                 />
             </View>
@@ -72,9 +65,9 @@ const create = () => {
             <View style={styles.inputContainer}>
                 <Text style={styles.labelText}>Middle name:</Text>
                 <TextInput
-                    placeholder="Middle name"
-                    value={formData.middleName}
-                    onChangeText={(text) => handleChange('middleName', text)}
+                    placeholder="medicinePrescribed"
+                    value={formData.medicinePrescribed}
+                    onChangeText={(text) => handleChange('medicinePrescribed', text)}
                     style={styles.input}
                 />
             </View>
@@ -82,9 +75,9 @@ const create = () => {
             <View style={styles.inputContainer}>
                 <Text style={styles.labelText}>Date of birth:</Text>
                 <TextInput
-                    placeholder="yyyy/mm/dd"
-                    value={formData.dateOfBirth}
-                    onChangeText={(text) => handleChange('dateOfBirth', text)}
+                    placeholder="procedureUndertaken"
+                    value={formData.procedureUndertaken}
+                    onChangeText={(text) => handleChange('procedureUndertaken', text)}
                     style={styles.input}
                 />
             </View>
@@ -92,32 +85,14 @@ const create = () => {
             <View style={styles.inputContainer}>
                 <Text style={styles.labelText}>Home address:</Text>
                 <TextInput
-                    placeholder="Home address"
-                    value={formData.homeAddress}
-                    onChangeText={(text) => handleChange('homeAddress', text)}
+                    placeholder="dateofNextAppointment"
+                    value={formData.dateOfNextAppointment}
+                    onChangeText={(text) => handleChange('dateOfNextAppointment', text)}
                     style={styles.input}
                 />
             </View>
 
-            <View style={styles.inputContainer}>
-                <Text style={styles.labelText}>Date of registration:</Text>
-                <TextInput
-                    placeholder="yyyy/mm/dd"
-                    value={formData.dateOfRegistration}
-                    onChangeText={(text) => handleChange('dateOfRegistration', text)}
-                    style={styles.input}
-                />
-            </View>
-
-            <View style={styles.inputContainer}>
-                <Text style={styles.labelText}>Matriculation number:</Text>
-                <TextInput
-                    value={formData.matriculationNumber}
-                    onChangeText={(text) => handleChange('matriculationNumber', text)}
-                    keyboardType="numeric"
-                    style={styles.input}
-                />
-            </View>
+            
 
             <Button title="Submit" onPress={handleFormSubmit} color="pink" />
         </ScrollView>

@@ -12,8 +12,6 @@ export default function HomeScreen() {
 
   const [data, setData] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showRead, setShowRead] = useState(true);
 
   useEffect(() => {
@@ -22,7 +20,7 @@ export default function HomeScreen() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://172.20.10.2:3000/biodata-of-patients');
+      const response = await axios.get('http://10.9.116.121:3000/biodata-of-patients');
       setData(response.data);
     } catch (error) {
       console.error("Here" + error);
@@ -31,28 +29,12 @@ export default function HomeScreen() {
 
   const handleDelete = async (id: any) => {
     try {
-      await axios.delete(`http://172.20.10.2:3000/biodata-of-patients/${id}`);
+      await axios.delete(`http://10.9.116.121:3000/biodata-of-patients/${id}`);
       fetchData(); // Refetch the data after deletion
     } catch (error) {
       console.error(error);
     }
   };
-
-  const handleUpdate = (id: any) => {
-    setSelectedId(id);
-    setShowUpdateForm(true);
-    setShowCreateForm(false);
-    setShowRead(false);
-  };
-
-const handleShowCreateForm = () => {
-  setSelectedId(null);
-  setShowUpdateForm(false);
-  setShowCreateForm(true);
-  setShowRead(false);
-};
-
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,6 +55,7 @@ const handleShowCreateForm = () => {
               <Text style={styles.itemText}>Matriculation Number: {item.matriculationNumber}</Text>
               <View style={styles.buttonContainer}>
                 <Button onPress={() => router.push(`/${item.id}`)} title="Update" color={styles.vpink.color} />
+                <Button onPress={() => router.push(`records/all/${item.id}`)} title="Records" color={styles.vpink.color} />
                 <Button onPress={() => handleDelete(item.id)} title="Delete" color={styles.vpink.color} />
               </View>
             </View>
