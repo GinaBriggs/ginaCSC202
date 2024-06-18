@@ -13,12 +13,12 @@ services:
     container_name: toothfixer-nginx
     build:
       context: .
-      dockerfile: nginx/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - 80:80
     restart:  always
     extra_hosts:
-      - "toothfixer:10.9.123.235" 
+      - "toothfixers:10.9.116.121" 
       #Change IP address Everytime Network changes, both in .yml file and configuration file nginx.conf
       #No internet -
       #PAU Network - 10.9.68.38
